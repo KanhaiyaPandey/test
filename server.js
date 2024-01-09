@@ -8,6 +8,11 @@ import morgan, { format } from "morgan";
 import mongoose from "mongoose";
 import {StatusCodes} from "http-status-codes";
 
+// public
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 // cookie parser
 import cookieParser from "cookie-parser";
 
@@ -27,11 +32,13 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 if(process.env.NODE_ENV === "development"){
     app.use(morgan('dev'));
   }
 
-
+app.use(express.static(path.resolve(__dirname,"./client/dist")))
 app.use(cookieParser());
 app.use(express.json());
 app.use(errorHandler);
@@ -40,7 +47,9 @@ app.use(errorHandler);
 app.use("/api/v1/assign/users",authenticateUser, userRouter);
 app.use("/api/v1/assign/auth", authRouter);
 
-
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
+});
 
 
 // not found error
