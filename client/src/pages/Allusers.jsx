@@ -1,5 +1,5 @@
 import {  useLoaderData } from "react-router-dom"
-import User from "../components/user";
+import User from "../components/UserSingle";
 
 
 const Allusers = () => {

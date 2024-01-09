@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { Link, useLoaderData } from 'react-router-dom';
-import User from '../components/user';
+import User from '../components/UserSingle';
 
 const Home = () => {
 
@@ -28,9 +28,6 @@ const Home = () => {
 
 
     </>
-  
-
-
 
   )
 }
